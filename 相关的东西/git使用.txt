@@ -1,0 +1,89 @@
+Git是目前世界上最先进的分布式版本控制系统(云端托管)
+码云也不错(国产的),SVN(公司内部服务器)
+官网：https://github.com
+
+安装git
+
+配置用户名：git config --global user.name "QinyiXiong"
+配置邮箱：git config --global user.email "972354178@qq.com"
+
+创建版本库：
+1.在本地创建一个文件夹
+2.cd 进入该目录，cd 将目录拖入黑屏终端
+3.使用 git init命令，使用命令后可用ls -a查看
+4.将代码(hello.txt)或者项目相关文件放入上述目录
+5.输入命令: git add hello.txt
+6.提交到仓库：git commit -m "第一次提交"
+
+查看仓库状态 git status
+查看修改的内容：git diff
+查看提交日志：git log
+查看修改所有日志：git relog
+
+版本回退：
+git reset --hard HEAD^  回到上一版本
+git reset --hard HEAD~100 回到上100个版本
+git reset --hard 版本号   回退到指定版本
+版本号通过命令 git log --pretty=oneline 查看
+
+对于仓库来说分为：工作区,缓存区 和 版本区
+add的时候添加到缓存区，commit 的时候添加到版本区
+.git目录是Git的版本库:缓存区state,自动创建一个分支(master),指向master的指针(HEAD)
+
+git checkout -- hello.txt 让文件回退到最后一次 add 或者 commit时的状态
+
+使用远程仓库：
+1.创建SSH Key: ssh-keygen -t rsa -C "972354178@qq.com" 一直回车
+2.进入目录：/c/Users/Pe_Qyx/.ssh  (cd 命令)
+3.保存公钥：cat id_rsa.pub
+4.去官网配置SSH->新建SSH->将公钥复制进去
+5.测试密钥是否通过: ssh -T git@github.com
+
+创建远程仓库：
+1.去官网创建 new Repositories
+2.关联远程仓库：git remote add origin git@github.com:QinyiXiong/PersonalPractice.git
+(去官网找到对应的repositories 点击clone or download 选择 use ssh 复制即可 )
+
+删除关联: git remote rm origin
+
+3.先拉取远程库内容到本地，否则会报错
+git pull origin master --allow-unrelated-histories
+
+4.将本地代码推上远程仓库：git push origin master
+
+
+从0开发：先有远程库，从远程库克隆：git clone 远程库地址
+
+git add .
+git commit -m "描述"  //提交所有
+
+在库中添加 .gitignore文件,在文件中写入不需要推上远程仓库的文件名
+
+创建一个分支：进入到库里，输入命令：git branch qyxBranch
+查看分支：git branch
+切换分支：git checkout qyxBranch
+创建与切换同时进行：git checkout -b 分支名
+
+把分支的工作成果合并到master分支上：切换到要合并的分支上执行命令 git merge 分支名
+
+将分支推入远程仓库：先切换到分支并执行命令：git push --set-upstream origin qyxBranch
+
+克隆分支仅仅只能克隆master分支,需要在本地创建自己的分支，然后切换到自己的分支，从自己的分支将远程仓库的分支拉取下来
+命令：git pull origin 分支名
+
+解决冲突：手动解决
+
+git log --graph 查看合并分支树状图
+
+标签：git tag v1.0  //打个版本号
+git tag //查看标签
+git checkout v1.0   //切换到标签v1.0
+git tag -a 标签名 -m "标签信息"   //指定标签信息
+git show 标签名    //查看标签的文字说明
+git tag -d 标签名   //删除标签名
+git push origin 标签名   //推送标签到远程
+git push origin --tags    //一次性推送全部尚未推送到远程的本地标签
+
+先删除本地标签 git tag -d 标签名
+再从远程删除   git push origin :refs/tags/标签名
+

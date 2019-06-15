@@ -1,0 +1,53 @@
+一、下载安装包 
+ 打开mysql官网下载页面：http://dev.mysql.com/downloads/mysql/
+
+二、mysql配置
+打开刚刚解压的文件夹C:\wamp-all\mysql-5.7.13 ，新建一个名字为my.ini的配置文件
+编辑my.ini配置以下基本信息：
+
+[mysql]
+
+# 设置mysql客户端默认字符集
+
+default-character-set=utf8 
+
+[mysqld]
+
+#设置3306端口
+
+port = 3306 
+
+# 设置mysql的安装目录
+
+basedir=D:\mysql\mysql-5.6.17-winx64
+
+# 设置mysql数据库的数据的存放目录
+
+datadir=D:\mysql\mysql-5.6.17-winx64\data
+
+# 允许最大连接数
+
+max_connections=200
+
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+
+character-set-server=utf8
+
+# 创建新表时将使用的默认存储引擎
+
+default-storage-engine=INNODB
+
+三、安装启动mysql
+用管理员身份打开cmd命令行工具，cd到解压文件的bin目录：C:\mysql-5.7.13\bin
+输入mysqld install回车运行，出现安装成功就可以了。
+mysqld --initialize-insecure自动生成无密码的root用户
+
+四、进入mysql环境
+1. cmd到bin目录下执行mysql -uroot （无需密码） ，
+2.新建一个用户，然后授权给他
+create user 'test'@'localhost' identified by '你的密码';
+grant all privileges on *.* to test@'localhost';
+运行这两句sql语句，再次用test的身份输入密码进入
+
+五、配置环境变量
+右键我的电脑->属性->高级系统设置->环境变量->path->编辑，将下载解压的mysql的bin目录的全路径放里面：C:\mysql-5.7.13\bin; 

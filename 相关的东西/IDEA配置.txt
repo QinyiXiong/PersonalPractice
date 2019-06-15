@@ -1,0 +1,55 @@
+1.JDK环境
+2.建立项目
+3.隐藏         Settings -> Editor -> File Types -> Ignore files and folders   在后面追加     *.idea;*.iml;
+3.设置字体大小  Settings -> Editor -> Font -> Font: Consolas -> size:24
+4.设置编码格式，三个地方都选上UTF-8    File->Settings->Editor->File Encodings
+5.代码提示忽略大小写   Settings->Editor->General->Code Completion
+6.设置自动导包 Settings ->Editor->General ->Auto Import ->insert imports on paste(All)，Add unambiguous imports on the fly，Optimize imports on the fly（for current project）
+7.生成serialVersionUID：Settings->Editor->Inspections->Java->Serialization issues->Serializable class without 'serialVersionUID' 打上勾；回到代码，点击类名按Alt+Enter 选择 添加UID
+IDEA 自带Compare功能
+设置代码模板：File->Settings->Editor->File and Code Templates
+VTL语法  eg:
+/**
+ *@author: ${USER}
+ *@dateTime: ${DATE} ${TIME}
+ *@project_Name: ${PROJECT_NAME}
+ *@Name: ${NAME}
+ *
+*/
+
+
+所有设置完之后，导出设置：File -> Export Settings
+
+
+
+快捷生成代码：
+快速生成主方法：psvm 回车
+快速输出打印：sout 回车
+快速打出for 循环：fori
+快速打出增强for 循环：数组名.for
+Ctrl+Alt+t 生成流程控制语句：选中语句或语句块，按Ctrl+Alt+t，选择所需要的流程。这个常用于try-catch
+Alt+Insert：快速生成构造函数或者get和set方法或者重写toString（）或者重写父类的方法Override Methods
+Debug模式，找一行代码点上断点，用Debug运行，F8为单步执行，F7进入调用的方法
+Ctrl+D复制光标所在行
+Ctrl+F 在当前文件中查找
+Ctrl+H 查看类的继承结构
+Ctrl+N 通过类名定位文件
+Ctrl +O 快速重写父类方法
+Ctrl+X 剪切所选中行
+Ctrl+Y删除光标所在行(修改为反撤销) Settings->Keymap->
+Ctrl +F12 将类进行大纲式的显示
+Ctrl+/ 选中代码单行注释
+Ctrl+shift+/多行注释
+Ctrl+W 逐行选择代码
+Ctrl+Alt+B 在某个调用的接口方法名上使用会跳到具体的实现处
+Ctrl+Alt+L格式化代码可以对当前文件和整个包目录使用
+Ctrl+Alt+左 返回上一个方法
+Ctrl+Alt+右 
+Ctrl+R 替换 replace all
+Ctri+shift+R 替换（整个工程）
+Alt+Enter 选取所需要的包，
+
+
+idea项目脱离SVN控制步骤：
+1.删除.svn目录
+2.修改.idea目录中的额vcs.xml文件，将整个component节点删除
