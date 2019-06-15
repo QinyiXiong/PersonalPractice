@@ -1,0 +1,171 @@
+一 操作mongodb数据库
+1.创建数据库
+		语法：use 数据库名
+		注意：如果不存在数据库则创建数据库，否则切换到指定的数据库;
+		如果刚刚创建的数据库不在列表内，如果要显示它，我们需要向刚刚创建的数据库中
+		插入一些数据
+2.查看所有数据:
+		语法：show dbs
+3.查看当前正在使用的数据库
+		语法：db或db.getName()
+4.插入数据：
+		语法：db.student.insert({name:"tom", age:18, gender:1, address:"北京", isDelete:0})   //db表示当前数据库，student表示集合
+5.断开连接：
+		语法：exit
+6.查看命令api
+		语法：help
+7.删除数据库
+		前提：使用当前数据库(use 数据库名)
+		语法：db.dropDatabase()
+		
+		
+二 操作集合
+1.查看当前数据库下有哪些集合
+		语法：show collections
+2.创建集合
+		语法：db.createCollection("集合名")
+			示例： db.createCollection("class")
+		语法：db.集合名.insert(document)
+			示例:db.student.insert({name:"tom", age:18, gender:1, address:"北京", isDelete:0})
+		区别:前者创建的是一个空的集合，后者创建一个空的集合并添加一个文档
+			
+3.删除当前数据库中的集合
+		语法：db.集合名.drop()
+		示例：db.class.drop()
+
+
+三 文档的操作
+1.插入文档
+		a.使用insert()方法插入文档
+		语法：db.集合名.insert(document) 或 db.集合名.insert([document1,document2,...])
+		示例:db.student.insert({name:"tom", age:18, gender:1, address:"北京", isDelete:0})
+		插入多个：db.student.insert([{name:"tom", age:18, gender:1, address:"北京", isDelete:0},{name:"hehe", age:18, gender:1, address:"北京", isDelete:0}])
+		
+		b.使用save()方法插入文档
+		语法:db.集合名.save(document)
+		说明：如果不指定_id字段，save()方法类似于insert()方法，如果指定_id字段，则会更新
+		_id字段的数据。
+		示例1：db.student.save({name:"tom", age:18, gender:1, address:"北京", isDelete:0})
+		示例2：db.student.save({_id: ObjectId("5c86f84b4ba45602fc007763"),name:"hehe", age:38, gender:1, address:"北京", isDelete:0})
+
+2.文档更新
+		a.update()方法用于更新已存在的文档
+		语法：db.集合名.update(<query>,<update>,{upset:<boolean>,multi:<boolean>,writeConcern:<document>})
+		参数说明:query:update的查询条件,类似于sql里update语句内where后面的内容
+				 update:update的对象和一些更新的操作符($set,$inc)等,$set直接更新，$inc在原有的基础上累加后更新
+				 upset:可选,如果不存在update的记录,是否当新数据插入,true为插入,false为不插入,默认为不插入
+				 multi:可选，mongodb默认是false,只更新找到的第一条记录，如果这个参数为true，就按照条件查找出来的数据全部更新
+				 writeConcern: 可选,抛出异常的级别
+				 
+		需求：将hehe的年龄更新为25
+		示例:db.student.update({name:"hehe"},{$set:{age:25}})
+			 db.student.update({name:"hehe"},{$inc:{age:25}})
+			 db.student.update({name:"hehe"},{$set:{age:11}},{multi:true}) 
+				 	 
+		b.save()方法通过传入的文档替换已有文档
+		语法：db.集合名.save(document,{writeConcern:<document>})
+		参数说明：document：文档数据
+				  writeConcern:可选，抛出异常的级别
+				  
+3.文档删除
+	说明：在执行remove()函数前，先执行find()命令来判断执行的条件是否存在是一个良好的习惯
+	语法：db.集合名.remove(
+		query,
+		{
+			justOne:<boolean>,
+			writeConcern:<document>
+		}
+	)
+	参数说明:query:可选，删除的文档条件
+			 justOne:可选，如果为true或1,则只删除一个文档
+	示例：db.student.remove({name:"hehe"})
+	
+4.文档查询
+	a.find()方法
+		查询集合下所有的文档(数据)
+		语法：db.集合名.find()
+		示例：db.student.find()
+	b.find()方法查询指定列
+		语法：db.集合名.find(query,{<key>:1,<key>:1})
+		示例：db.student.find({gender:1},{name:1,age:1})
+		参数说明:查询条件
+		key:要显示的字段,1表示显示
+		
+	c.pretty()方法以格式化的方式来显示文档
+		示例：db.student.find().pretty()
+	
+	d.findOne()方法查询匹配结果的第一条数据
+		示例：db.student.findOne({gender:0})
+		
+
+5.查询条件操作符
+	作用:条件操作符用于比较两个表达式并从Mongodb集合中获取数据
+	a.大于 $gt
+		语法:db.集合名.find({<key>:{$gt:<value>}})
+		示例:db.student.find({age:{$gt:20}})
+		
+	b.大于等于  $gte
+		语法:db.集合名.find({<key>:{$gte:<value>}})
+		示例:db.student.find({age:{$gte:20}})
+		
+	c.小于   $lt
+		语法:db.集合名.find({<key>:{$ltt:<value>}})
+		示例:db.student.find({age:{$lt:20}})
+		
+	d.小于等于  $lte
+		语法:db.集合名.find({<key>:{$lte:<value>}})
+		示例:db.student.find({age:{$lte:20}})
+		
+	e.大于等于 和 小于等于  $get 和 $lte
+		语法:db.集合名.find({<key>:{$gte:<value>,$lte:<value>}})
+	
+	f.等于  :
+		语法：db.集合名.find(<key>:<value>)
+		
+	g.使用_id进行查询
+		语法:db.student.find({"_id":ObjectId("id值")})
+		示例:db.student.find({"_id":ObjectId("5993828838ad8883223393")})
+	h.查询某个结果集的数据条数
+		示例：db.student.find().count()
+	i.查询某个字段的值当中是否包含另一个值
+		语法：
+		示例：db.student.find({name:/ile/})
+	j.查询某个字段的值是否以另一个值开头
+		语法：
+		示例：db.student.find({name:/^li/})
+
+6.条件查询 and 和 or
+	a.AND 条件
+		语法：db.集合名.fing({条件1,条件2,...,条件n})
+		示例：db.student.find({gender:0,age:{$gt:16}})
+	b.OR条件
+		语法：db.集合名.find({$or:[{条件1},{条件2},...,{条件n},]})
+		示例：db.student.find({$or:[{age:17},{age:{$get:20}}]})
+	C.AND 和 OR联合使用
+		语法：db.集合名.find({条件1,条件2,...$or:[{条件n},{条件n+1}]})
+
+7.limit,skip
+	a.limit()：读取指定数量的数据记录
+		db.student.find().limit(2)
+	b.skip(): 跳过指定数量的数据
+		db.student.find().skip(2)
+	c.skip 与 limit 联合使用
+		通常用这种方式实现分页功能
+		示例：db.student.find().skip(3).limit(3)
+			越过3条再拿3条
+
+8.排序
+	语法:db.集合名.find().sort({key:1|-1})
+	示例：db.student.find().sort({age:1}) 升序
+		  db.student.find().sort({age:-1}) 降序
+		注意：1表示升序,-1表示降序
+	
+
+
+
+
+
+
+
+
+		
