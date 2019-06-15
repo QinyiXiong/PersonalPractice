@@ -1,0 +1,42 @@
+腾讯云服务器tomcat地址：/home/tomcat/apache-tomcat-8.5.38/
+
+启动tomcat:     ./startup.sh
+关闭tomcat:    ./shutdown.sh
+
+搜索文件： find / -name file1
+eg：find / -redis file1
+
+Redis启动：redis-server /etc/redis.conf
+service redis start 
+
+centos7 查看开机启动项：chkconfig --list    (2~5为on，说明服务会随机器启动而自动启动)
+
+查看Mysql服务状态：service mysqld status
+启动mysql：service mysqld start
+连接Mysql服务：mysql -u root -p
+输入密码root
+查看数据库：show databases;
+使用mysql数据库：use phonemarket2;
+查看phonemarket2数据库表：show tables;
+停止MySQL服务：service mysqld stop
+
+mysql常用命令：
+删除数据库：drop database phonemarket2;
+使用source 命令导入sql
+source 命令导入数据库需要先登录到数库终端：
+mysql> create database phonemarket2;      # 创建数据库
+mysql> use phonemarket2;                  # 使用已创建的数据库 
+mysql> set names utf8;           # 设置编码
+mysql> source /home/sql文件/phonemarket2.sql  # 导入备份数据库
+
+修改mysql 当前用户密码
+set global validate_password_policy=0;
+set global validate_password_length=1;
+SET PASSWORD = PASSWORD('peqyx96');
+
+
+
+
+
+
+

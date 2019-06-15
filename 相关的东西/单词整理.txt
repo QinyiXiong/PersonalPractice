@@ -1,0 +1,22 @@
+annotation   注释
+driven  奋发努力的; 发愤图强的; 受…影响的; 由…造成的;   驾驶
+component   成分; 组分; 零件;
+resource   来源; 勇气; 才智; 谋略; 有助于实现目标的东西; 资源
+resolver  下决心者，解决[答]问题者;
+multipart  多部件的;
+Internal 内部的; 国内的; 体内的; 内心的;
+framework 框架; 构架; （体系的） 结构; 机构，组织;
+common 普通的; 通俗的; [数学] 公共的; 共有的;
+intercept  截击; 拦截，拦住; 截球; 拦阻;
+context    语境; 上下文; 背景; 环境
+config  配置
+Location 定位; 位置
+filter  滤波器; 滤光器; 滤色镜; [化] 过滤器;
+async 异步的;
+appender  附加器;
+mock 虚假的; 模仿的; 模拟的;嘲笑; (模仿) 嘲弄; 不尊重; 蔑视;
+yield 出产(作物); 产生(收益、效益等); 提供; 屈服; 让步; 放弃; 缴出;产量; 产出; 利润;
+priority 优先事项; 最重要的事; 首要事情; 优先; 优先权; 重点; (车辆的) 优先通行权;
+synchronized 同步
+interrupt 插嘴; 打扰; 打岔; 使暂停; 使中断; 阻断，遮挡；
+

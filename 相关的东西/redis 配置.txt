@@ -1,0 +1,217 @@
+
+redis 常用做缓存机制
+
+
+1.进入redis目录下
+找到redis.windows.conf 配置文件
+修改
+# requirepass foobared
+requirepass root
+
+即添加密码为:root
+
+2.
+bind: 127.0.0.1   主机IP
+port: 6379   端口号
+dbfilename dump.rdb  数据文件
+
+3.黑屏终端启动服务
+进入redis目录下
+执行：redis-server.exe  redis.windows.conf
+
+4.另外启一个黑屏终端,进入redis目录下执行: redis-cli.exe
+ping 命令测试服务器连接状况
+明显第一次ping 显示连接有错误(认证错误,需要密码)
+键入密码命令： auth 'root'  
+
+
+测试： set name qyx
+
+安装 redis 可视化工具  Redis Desktop Manager
+
+redis 是key-value的数据,所以每个数据都是一个键值对
+键的类型是字符串
+
+值的类型分为5种:字符串String,哈希hash,列表list,集合set,有序集合zset
+
+数据操作的全部命令:http://redis.cn/commands.html
+
+一:String
+概述：String 是redis最基本的类型,最大能存储512M的数据,String 类型是二进制安全的,即可以存储任何数据,比如数字,图片,序列化对象等
+1.设置
+	a.设置键值
+		set key value
+	b.设置键值及过期时间,以秒为单位
+		setex key seconds value
+		setex c 10 good   //让c-good 存在10秒
+	c.设置多个键值
+		mset key value [key value...]
+		mset d good e nice
+2.获取
+	a.根据键获取值,如果键不存在则返回None(null)
+		get key
+	b.根据多个键获取多个值
+		mget key [key...]
+		mget a b c
+3.运算
+	要求:值是字符串类型的数字
+	a.将key对应的值加1
+		incr key
+	b.将key对应的值减1
+		decr key
+	c.将key对应的值加整数
+		incrby key number
+		incrby f 2
+	d.将key对应的值减整数
+		decrby key number
+		decrby f 2
+4.其他
+	a.追加值
+		append key value
+		append c !
+	b.获取值长度
+		strlen key
+		strlen c
+二:key
+	1.查找键,参数支持正则
+		keys pattern
+		keys *
+	2.判读键是否存在,如果存在返回1,不存在返回0
+		exists key[key...]
+	3.查看键对应的value类型
+		type key
+	4.删除键及对应的值
+		del key [key...]
+	5.设置过期时间,以秒为单位
+		expire key seconds
+		expire a 5
+	6.查看有效时间,以秒为单位 -1表示无限时间
+		ttl key
+
+三:hash
+	概述:hash用于存储对象
+	{
+		name:"tom",
+		age:18
+	}
+	1.设置
+		a.设置单个值
+			hset key field value
+			hset p1 name tom
+			hset p1 age 18
+		b.设置多个值
+			hmset key field value [field value...]
+			hmset p2 name lilei age 20
+	2.获取
+		a.获取一个属性的值
+			hget key field
+			hget p1 name
+		b.获取多个数学的值
+			hmget key field[field...]
+			hmget p1 name age
+		c.获取所有属性和值
+			hgetall key 
+			hgetall p1
+		d.获取所有属性 
+			hkeys key
+			hkeys p1
+		e.获取所有值
+			hvals key
+			hvals p1
+		f.返回包含属性的个数
+			hlen key
+			hlen p1
+	3.其他
+		a.判断属性是否存在 1存在 0不存在
+			hexists key field
+			hexists p1 name
+		b.删除属性及值
+			hdel key field [field..]
+			hdel p1 name age
+			hdel p1 name
+		c.返回值的字符串长度
+			hstrlen key field
+			hstrlen p1 name
+
+四:list
+	概述:列表的元素类型为string,按照插入的顺序排序,在列表的头部或尾部添加元素
+	1.设置
+		a.在头部插入
+			lpush key value[value...]   //左边插入
+			lpush s1 1
+		b.在尾部插入
+			rpush key value[value...]
+			rpush s1 2
+		c.在一个元素的前或后插入新元素
+			linsert key before|after pivot value             //pivot 表示原始存在的元素
+			linsert s1 after 9 10
+		d.设置指定所引的元素值
+			lset key index value     //注意：index从0开始,索引值可以是负数,表示偏移量是从List的尾部开始,如-1表示最后一个元素
+			lset s1 0 0
+	2.获取 
+		a.移除并返回key对应的List的第一个元素
+			lpop key
+		b.移除并返回key对应的List的最后一个元素
+			rpop key
+		c.返回存储在key的列表中的指定范围的元素
+			lrange key start end
+			lrange s1 0 -1
+			注意:start end 都是从0开始,偏移量可以是负数
+	3.其他
+		a.裁剪列表,改为原集合的一个子集
+			ltrim key start end
+			注意:start end 都是从0开始,偏移量可以是负数
+		b.返回存储在key里的list的长度
+			llen key
+		c.返回列表中索引对应的值
+			lindex key index
+			lindex s1 1
+五:set
+	概述:无序集合,元素类型为String类型,元素具有唯一性,不重复
+	1.设置 
+		a.添加元素
+			sadd key member[member...]
+			sadd d1 1 2 3 4 5 
+	2.获取 
+		a.返回key集合中所有元素
+			smembers key
+		b.返回集合元素个数
+			scard key
+	3.其他
+		a.求多个集合的交集
+			sinter key[key...]
+		b.求多个集合的差集
+			sdiff key [key...]
+		c.求多个集合的合集
+			sunion key[key...]
+		d.判断元素是否在集合中
+			sismember key member
+		
+		
+
+
+六:zset
+	概述:
+	a.有序集合,元素类型为String,元素具有唯一性,不能重复
+	b.每个元素都会关联一个double类型的score(表示权重),通过权重的大小排序,元素的score可以相同
+	
+	1.设置
+		a.添加
+			zadd key score member[score member...]
+			zadd z1 1 a 5 b 3 c 2 d 4 e
+	2.获取 
+		a.返回指定范围的元素
+			zrange key start end
+			zrange z1 0 -1
+		b.返回元素个数
+			zcard key
+			zcard z1
+		c.返回有序集合key中,score在min和max之间的元素
+			zcount key min max
+		d.返回有序集合key中,成员memeber的score值
+			zscore key member
+			zscore z1 c
+			
+		
+
+

@@ -53,3 +53,8 @@ Alt+Enter 选取所需要的包，
 idea项目脱离SVN控制步骤：
 1.删除.svn目录
 2.修改.idea目录中的额vcs.xml文件，将整个component节点删除
+
+idea导入Eclipse web项目：
+1.导入
+2.配置Project Structure
+3.配置Edit Configurations  添加tomcat服务器
