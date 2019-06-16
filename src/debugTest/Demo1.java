@@ -4,7 +4,7 @@ package debugTest;
  * @author: Pe_Qyx
  * @dateTime: 2019/6/11 18:55
  * @project_Name: PersonalPractice
- * @Name: Demo1
+ * @Name: JFrame_Demo1
  */
 public class Demo1 {
     public static void main(String[] args) {
