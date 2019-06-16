@@ -10,7 +10,7 @@ import java.util.List;
  * @Name: GenericTest
  */
 public class GenericTest {
-    public static void getData(List<?> data){
+    public static void getData(List<?> data) {
         System.out.println("Data: " + data.get(0));
     }
 

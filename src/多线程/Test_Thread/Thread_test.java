@@ -21,6 +21,14 @@ public class Thread_test {
         this.size = tickets;
     }
 
+    public static void main(String[] args) {
+        Thread_test t = new Thread_test(10);
+        consumer c1 = new consumer(t);
+        producer p1 = new producer(t);
+        c1.start();
+        p1.start();
+    }
+
     public synchronized void sell() {
         try {
             if (!available) {
@@ -46,13 +54,5 @@ public class Thread_test {
         System.out.println("存入第 " + (++number) + " 号票");
         available = true;
         notify();
-    }
-
-    public static void main(String[] args) {
-        Thread_test t = new Thread_test(10);
-        consumer c1 = new consumer(t);
-        producer p1 = new producer(t);
-        c1.start();
-        p1.start();
     }
 }

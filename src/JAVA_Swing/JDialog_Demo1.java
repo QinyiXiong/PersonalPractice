@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 public class JDialog_Demo1 extends JDialog {
     public JDialog_Demo1(JFrame frame) {
         //第一个参数是父窗体对象，第二个参数是对话框标题，第三个参数：是否阻塞父窗体即只能在当前弹出的窗体中操作
-        super(frame, "对话框标题",true);
+        super(frame, "对话框标题", true);
         Container c = getContentPane();//获取窗体容器
         c.add(new JLabel("这是一个对话框"));
 
@@ -23,7 +23,7 @@ public class JDialog_Demo1 extends JDialog {
 
     public static void main(String[] args) {
         JFrame f = new JFrame("父窗体");
-        f.setBounds(960,540,660,500);
+        f.setBounds(960, 540, 660, 500);
         Container c = f.getContentPane();
         JButton btn = new JButton("弹出对话框");
         c.setLayout(new FlowLayout()); //设置布局,使用流布局
@@ -35,9 +35,9 @@ public class JDialog_Demo1 extends JDialog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               JDialog_Demo1 d =  new JDialog_Demo1(f);
-               d.setBounds(980,550,360,200);
-               d.setVisible(true);
+                JDialog_Demo1 d = new JDialog_Demo1(f);
+                d.setBounds(980, 550, 360, 200);
+                d.setVisible(true);
 
             }
         });

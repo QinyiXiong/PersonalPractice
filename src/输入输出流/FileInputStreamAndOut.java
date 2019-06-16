@@ -13,15 +13,15 @@ import java.io.IOException;
 
 
 /*
-* 复制文件
-*
-* */
+ * 复制文件
+ *
+ * */
 public class FileInputStreamAndOut {
     public static void main(String[] args) {
         try {
             FileInputStream fin = new FileInputStream("C:\\Users\\Pe_Qyx\\Pictures\\壁纸\\111.jpg");
             FileOutputStream fout = new FileOutputStream("C:\\Users\\Pe_Qyx\\Pictures\\111.jpg");
-            byte [] copyPicture = new byte[fin.available()];
+            byte[] copyPicture = new byte[fin.available()];
             fin.read(copyPicture); //将文件读入byte数组
             fout.write(copyPicture);  //将数组写入文件
         } catch (IOException e) {

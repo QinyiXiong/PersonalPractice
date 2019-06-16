@@ -16,6 +16,30 @@ public class Person implements Serializable {
     private String sex;
     private int age;
 
+    public Person(String name, String sex, int age) {
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+    }
+
+    public static void main(String[] args) {
+        System.out.println();
+        for (int i = 0; i < 100; i++) {
+            System.out.println(i);
+        }
+
+        String[] arrs = {"aaa", "bbb", "ccc"};
+        for (String str : arrs) {
+            System.out.println(str);
+        }
+
+        try {
+            System.out.println("Ctrl+Alt+t");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
@@ -29,7 +53,6 @@ public class Person implements Serializable {
                 ", age=" + age +
                 '}';
     }
-
 
     public String getName() {
         return name;
@@ -53,29 +76,5 @@ public class Person implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public Person(String name, String sex, int age) {
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
-    }
-
-    public static void main(String[] args) {
-        System.out.println();
-        for (int i = 0; i < 100; i++) {
-            System.out.println(i);
-        }
-
-        String[] arrs = {"aaa","bbb","ccc"};
-        for (String str : arrs) {
-            System.out.println(str);
-        }
-
-        try {
-            System.out.println("Ctrl+Alt+t");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

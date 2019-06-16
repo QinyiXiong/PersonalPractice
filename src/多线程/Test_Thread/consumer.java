@@ -15,7 +15,7 @@ public class consumer extends Thread {
 
     @Override
     public void run() {
-        while (t.number <= t.size){
+        while (t.number <= t.size) {
             t.sell();
         }
     }

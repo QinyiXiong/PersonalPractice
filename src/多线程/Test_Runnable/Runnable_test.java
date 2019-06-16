@@ -10,6 +10,18 @@ public class Runnable_test implements Runnable {
 
     private int tickets = 100;
 
+    public static void main(String[] args) {
+        Runnable_test t = new Runnable_test();
+        Thread t1 = new Thread(t, "售票窗口1");
+        Thread t2 = new Thread(t, "售票窗口2");
+        Thread t3 = new Thread(t, "售票窗口3");
+        Thread t4 = new Thread(t, "售票窗口4");
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+    }
+
     public synchronized int SaleTickets() {
         try {
             Thread.sleep(300);
@@ -27,18 +39,5 @@ public class Runnable_test implements Runnable {
             System.out.println(Thread.currentThread().getName() + " 出售了第 " + SaleTickets() + " 张机票");
         }
 
-    }
-
-
-    public static void main(String[] args) {
-        Runnable_test t = new Runnable_test();
-        Thread t1 = new Thread(t, "售票窗口1");
-        Thread t2 = new Thread(t, "售票窗口2");
-        Thread t3 = new Thread(t, "售票窗口3");
-        Thread t4 = new Thread(t, "售票窗口4");
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
     }
 }

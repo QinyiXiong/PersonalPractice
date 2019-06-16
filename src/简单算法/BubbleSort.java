@@ -1,7 +1,5 @@
 package 简单算法;
 
-import java.util.concurrent.ForkJoinPool;
-
 /**
  * @author: Pe_Qyx
  * @dateTime: 2019/6/11 20:32
@@ -18,24 +16,25 @@ import java.util.concurrent.ForkJoinPool;
 第一趟比较完成后，最后一个数一定是数组中最大的一个数，所以第二趟比较的时候最后一个数不参与比较；*/
 public class BubbleSort {
 
-    public void Bubble_Sort(int []arr){
-        int temp;
-        for (int i = 0; i < arr.length-1 ; i++) {
-            for (int j = 0; j < arr.length-i-1 ; j++) {
-                if(arr[j] > arr[j+1]){
-                    temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
-                }
-            }
-        }
-    }
     public static void main(String[] args) {
-        int []arr = {9,5,4,2,77,10,23,6,4,20,78,1};
+        int[] arr = {9, 5, 4, 2, 77, 10, 23, 6, 4, 20, 78, 1};
         new BubbleSort().Bubble_Sort(arr);
         for (int i : arr) {
             System.out.print(i);
             System.out.print("  ");
+        }
+    }
+
+    public void Bubble_Sort(int[] arr) {
+        int temp;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
         }
     }
 }

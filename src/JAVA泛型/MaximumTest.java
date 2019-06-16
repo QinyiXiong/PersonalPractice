@@ -8,17 +8,17 @@ package JAVA泛型;
  */
 
 /*
-*对于下面定义的泛型方法maximum中,Comparable指的是一个接口而不是一个类，这点应该注重注意下。
-*如果想调用这个方法，最关键的是传入的T类型必须已经是实现了Comparable接口中compareTo()这个方法。
-* */
+ *对于下面定义的泛型方法maximum中,Comparable指的是一个接口而不是一个类，这点应该注重注意下。
+ *如果想调用这个方法，最关键的是传入的T类型必须已经是实现了Comparable接口中compareTo()这个方法。
+ * */
 public class MaximumTest {
 
-    public static <T extends Comparable<T>> T maximum(T x, T y, T z){
+    public static <T extends Comparable<T>> T maximum(T x, T y, T z) {
         T max = x;
-        if(y.compareTo(max) > 0){
+        if (y.compareTo(max) > 0) {
             max = y;
         }
-        if(z.compareTo(max) > 0){
+        if (z.compareTo(max) > 0) {
             max = z;
         }
         return max;

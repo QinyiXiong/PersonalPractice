@@ -73,7 +73,7 @@ public class SwingLoginExample {
         frame.setSize(350, 200);
 
         //设置窗体的起始位置
-        frame.setLocation(960,540);
+        frame.setLocation(960, 540);
 
         //也可以合并为一句话：frame.setBounds(960,540,350,200);
 
@@ -103,7 +103,7 @@ public class SwingLoginExample {
         frame.setVisible(true);
 
         //获取窗体的位置
-        System.out.println("X = "+frame.getX()+" Y = "+frame.getY());
+        System.out.println("X = " + frame.getX() + " Y = " + frame.getY());
 
 //        //获取窗体容器
 //        Container c = frame.getContentPane();

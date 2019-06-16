@@ -8,7 +8,7 @@ package JAVA泛型;
  */
 public class multiple_arrays {
 
-    public static <T> void printArray( T[] inputarray){
+    public static <T> void printArray(T[] inputarray) {
         for (T t : inputarray) {
             System.out.print(t);
             System.out.print("  ");

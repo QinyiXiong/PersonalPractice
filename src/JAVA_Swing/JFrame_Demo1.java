@@ -14,7 +14,7 @@ public class JFrame_Demo1 extends JFrame {
         setVisible(true);//设置窗体可见
         setTitle("窗体标题");//设置窗体标题
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(960,540,350,200);
+        setBounds(960, 540, 350, 200);
         Container c = getContentPane();
         c.setBackground(Color.white);//设置背景颜色
         JLabel l = new JLabel("这是一个窗体");

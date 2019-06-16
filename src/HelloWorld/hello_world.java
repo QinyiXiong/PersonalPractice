@@ -8,14 +8,14 @@ package HelloWorld;
  */
 public class hello_world {
 
-    @Override
-    public String toString() {
-        return "Hello World!~";
-    }
-
     public static void main(String[] args) {
 
         System.out.println(new hello_world());
 
+    }
+
+    @Override
+    public String toString() {
+        return "Hello World!~";
     }
 }

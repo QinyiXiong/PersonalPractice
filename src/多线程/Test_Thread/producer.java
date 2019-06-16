@@ -15,7 +15,7 @@ public class producer extends Thread {
 
     @Override
     public void run() {
-        while (t.number < t.size){
+        while (t.number < t.size) {
             t.put();
         }
     }
