@@ -1,0 +1,15 @@
+GlassFish 是一款强健的商业兼容应用服务器，达到产品级质量，可免费用于开发、部署和重新分发。开发者可以免费获得源代码，还可以对代码进行更改
+
+glassfish基础命令整理：
+
+cd /opt/glassfish3/glassfish/bin
+
+sh asadmin create-domain qyxtest
+
+sh asadmin start-domain qyxtest
+
+sh asadmin --host 192.168.248.158 --port 15099 enable-secure-admin
+
+清缓存，重启domain
+
+进入Applications 选择项目，Type 选Web Application
