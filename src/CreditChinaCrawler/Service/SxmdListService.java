@@ -1,7 +1,6 @@
 package CreditChinaCrawler.Service;
 
 
-
 import CreditChinaCrawler.Bean.sxmdBean;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.db.Db;
@@ -63,6 +62,11 @@ public class SxmdListService {
         for(int i = 1;i <= page; i++){
             paramMap.put(UrlParam_Page,i);
             jsonStr = HttpUtil.get(url1,paramMap);
+
+            if(!JSONUtil.isJson(jsonStr)){
+                continue;
+            }
+
             JSONObject data = JSONUtil.parseObj(jsonStr).getJSONObject("data");
 
             JSONArray results = data.getJSONArray("results");
@@ -98,16 +102,22 @@ public class SxmdListService {
     public sxmdBean getEnterpriseDetail(String encryStr,String creditType,String name,String idCardOrOrgCode) {
 
         sxmdBean sxdata = new sxmdBean();
-        HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("encryStr",encryStr);
-        String jsonStr = "";
-        jsonStr = HttpUtil.get(url3,paramMap);
-        JSONObject data = JSONUtil.parseObj(jsonStr).getJSONObject("result");
-
         sxdata.setF_GUID(IdUtil.simpleUUID());
         sxdata.setF_MDLB(creditType);
         sxdata.setF_ZTLX(name);
         sxdata.setF_ZCH(idCardOrOrgCode);
+
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("encryStr",encryStr);
+        String jsonStr = "";
+        jsonStr = HttpUtil.get(url3,paramMap);
+
+        if(!JSONUtil.isJson(jsonStr)){
+            getEnterpriseDetail(encryStr,creditType,name,idCardOrOrgCode);
+            return sxdata;
+        }
+
+        JSONObject data = JSONUtil.parseObj(jsonStr).getJSONObject("result");
         sxdata.setF_SHXYDM(data.getStr("creditCode"));
         sxdata.setF_SXQYDZ(data.getStr("dom"));
 
@@ -122,6 +132,11 @@ public class SxmdListService {
         for(int i = 1; i <= pageNum; i++){
             paramMap.put(UrlParam_PageNum,i);
             jsonStr = HttpUtil.get(url2,paramMap);
+
+            if(!JSONUtil.isJson(jsonStr)){
+                continue;
+            }
+
             JSONObject data = JSONUtil.parseObj(jsonStr);
             JSONArray result = data.getJSONArray("result");
 
@@ -352,11 +367,15 @@ public class SxmdListService {
             ss.getSxmdList(paramMap,5);
         }
 
-//        Db.use().insert(
-//                Entity.create("CG_CREDIT_LIST")
-//                        .set("F_GUID", "unitTestUser")
-//                        .set("F_ZTLX", "我爱北京天安门")
-//        );
+//        try {
+//            Db.use().insert(
+//                    Entity.create("CG_CREDIT_LIST")
+//                            .set("F_GUID", "unitTestUser")
+//                            .set("F_ZTLX", "我爱北京天安门")
+//            );
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }
