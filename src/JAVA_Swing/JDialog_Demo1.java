@@ -22,7 +22,7 @@ public class JDialog_Demo1 extends JDialog {
     }
 
     public static void main(String[] args) {
-        JFrame f = new JFrame("父窗体");
+        final JFrame f = new JFrame("父窗体");
         f.setBounds(960, 540, 660, 500);
         Container c = f.getContentPane();
         JButton btn = new JButton("弹出对话框");

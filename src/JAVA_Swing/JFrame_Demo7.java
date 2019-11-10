@@ -31,7 +31,7 @@ public class JFrame_Demo7 extends JFrame {
 //        JComboBox<String> comboBox = new JComboBox<>(items); //第二种方式：使用String数组添加下拉列表元素
 
 
-        JComboBox<String> comboBox = new JComboBox<>();
+        final JComboBox<String> comboBox = new JComboBox<>();
         String[] items = {"数组元素1", "数组元素2", "数组元素3"};
         ComboBoxModel cm = new DefaultComboBoxModel<>(items); //第三种方式：创建下拉列表模型
         comboBox.setModel(cm); //向下拉列表添加数据模型

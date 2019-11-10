@@ -25,7 +25,7 @@ public class JFrame_Demo12 extends JFrame {
         c.add(centerP, BorderLayout.CENTER);
 
         JPanel southP = new JPanel();
-        JLabel console = new JLabel("点击组件");
+        final JLabel console = new JLabel("点击组件");
         southP.add(console);
         c.add(southP, BorderLayout.SOUTH);
 

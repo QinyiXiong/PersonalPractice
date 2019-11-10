@@ -28,7 +28,7 @@ public class JFrame_Demo8 extends JFrame {
         for (String item : items) {
             modelJL.addElement(item);  //向数据模型添加元素
         }
-        JList<String> jl = new JList<>();
+        final JList<String> jl = new JList<>();
         jl.setModel(modelJL); //列表框载入数据模型
         /*参数说明：
          * ListSelectionModel.SINGLE_SELECTION：单选模式

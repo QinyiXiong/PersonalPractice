@@ -21,7 +21,7 @@ public class JFrame_Demo10 extends JFrame {
         Container c = getContentPane();
         c.setLayout(new FlowLayout());
 
-        JPasswordField jp = new JPasswordField();
+        final JPasswordField jp = new JPasswordField();
         jp.setColumns(20);  //设置密码框长度，20个字符
 //        jp.setFont(new Font("Arial",Font.BOLD,18));
         jp.setEchoChar('#'); //设置回显字符

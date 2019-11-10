@@ -19,7 +19,7 @@ public class JFrame_Demo9 extends JFrame {
         Container c = getContentPane();
         c.setLayout(new FlowLayout());
 
-        JTextField jt = new JTextField();
+        final JTextField jt = new JTextField();
         jt.setColumns(20);  //设置文本框的长度,20个字符
         jt.setText("heheda"); //设置文本
         jt.setFont(new Font("黑体", Font.PLAIN, 20));  //设置字体格式
