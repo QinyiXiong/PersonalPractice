@@ -61,8 +61,8 @@ public class testFastdfs {
         public static void main(String[] args) {
             testFastdfs test = new testFastdfs();
             try {
-//                test.getInfofast("hehe");
-                test.downloadFast("hehe");
+                test.getInfofast("hehe");
+//                test.downloadFast("hehe");
             }catch (Exception e){
                 e.printStackTrace();
             }

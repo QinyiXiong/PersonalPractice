@@ -208,7 +208,7 @@ public class FastDFSClient {
      */
     public FileInfo getFile(String groupName,String remoteFileName){
         try {
-            return storageClient.get_file_info(groupName, remoteFileName);
+            return storageClient.query_file_info(groupName, remoteFileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
