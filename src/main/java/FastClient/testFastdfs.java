@@ -15,14 +15,14 @@ import java.io.FileOutputStream;
  * @Describe： fastdfs 测试类
  */
 public class testFastdfs {
-    //上传文件
+    //上传文件  group1/M00/00/00/wKj4gl4O-PuAKUxYAAROQnOZ3eI936.png
     public void uploadFast(String request)throws Exception {
         // 1、把FastDFS提供的jar包添加到工程中
         // 2、初始化全局配置。加载一个配置文件。
         String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //上传文件
-        String filePath = fastDFSClient.uploadFile("F:\\Photos\\P70602-192547.jpg");
+        String filePath = fastDFSClient.uploadFile("/Users/pe_qyx/Desktop/hehe.png");
         System.out.println("返回路径：" + filePath);
         //省略其他
 
@@ -61,8 +61,9 @@ public class testFastdfs {
         public static void main(String[] args) {
             testFastdfs test = new testFastdfs();
             try {
-                test.getInfofast("hehe");
+//                test.getInfofast("hehe");
 //                test.downloadFast("hehe");
+                test.uploadFast("hehe");
             }catch (Exception e){
                 e.printStackTrace();
             }
