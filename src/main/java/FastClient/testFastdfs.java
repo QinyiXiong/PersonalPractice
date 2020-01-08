@@ -15,20 +15,20 @@ import java.io.FileOutputStream;
  * @Describe： fastdfs 测试类
  */
 public class testFastdfs {
-    //上传文件  group1/M00/00/00/wKj4gl4O-PuAKUxYAAROQnOZ3eI936.png
-    public void uploadFast(String request)throws Exception {
+    //上传文件
+    public void uploadFast()throws Exception {
         // 1、把FastDFS提供的jar包添加到工程中
         // 2、初始化全局配置。加载一个配置文件。
         String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
-        //上传文件
-        String filePath = fastDFSClient.uploadFile("/Users/pe_qyx/Desktop/hehe.png");
+        //上传文件  group1/M00/00/00/wKj4gl4UHtyAGvGtAA8lRFOCqy4090.pdf
+        String filePath = fastDFSClient.uploadFile("/Users/pe_qyx/Downloads/es.pdf");
         System.out.println("返回路径：" + filePath);
         //省略其他
 
     }
 
-    public void deleteFast(String request)throws Exception{
+    public void deleteFast()throws Exception{
         String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //删除文件
@@ -37,19 +37,20 @@ public class testFastdfs {
 
     }
 
-    public void downloadFast(String request)throws Exception{
+    public void downloadFast()throws Exception{
         String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //下载文件到用户桌面位置
         FileSystemView fsv = FileSystemView.getFileSystemView();
         File com=fsv.getHomeDirectory(); //读取桌面路径
-        int downFlag=fastDFSClient.download_file("group1/M00/00/00/wKj4gl4OuMKAYsHnAADcCb28qS0100.png",new BufferedOutputStream(new FileOutputStream(com.getPath()+"\\aa.png")));
+        int downFlag=fastDFSClient.download_file("group1/M00/00/00/wKj4gl4UHtyAGvGtAA8lRFOCqy4090.pdf",new BufferedOutputStream(new FileOutputStream(com.getPath()+"\\aa.png")));
         System.out.println("下载结果为：" +(downFlag==0?"下载文件成功":"下载文件失败"));
 
     }
 
     ///group1/M00/00/00/wKj4gl4OuMKAYsHnAADcCb28qS0100.png
-    public void getInfofast(String request)throws Exception{
+    //group1/M00/00/00/wKj4gl4UHtyAGvGtAA8lRFOCqy4090.pdf
+    public void getInfofast()throws Exception{
         String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //获取文件信息
@@ -61,9 +62,9 @@ public class testFastdfs {
         public static void main(String[] args) {
             testFastdfs test = new testFastdfs();
             try {
-//                test.getInfofast("hehe");
-//                test.downloadFast("hehe");
-                test.uploadFast("hehe");
+//                test.getInfofast();
+//                test.downloadFast();
+                test.uploadFast();
             }catch (Exception e){
                 e.printStackTrace();
             }
