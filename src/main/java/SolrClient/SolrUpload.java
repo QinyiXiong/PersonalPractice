@@ -77,7 +77,19 @@ public class SolrUpload {
         up.setParam("fmap.content", "attr_content");//文件内容
         up.setAction(ACTION.COMMIT, true, true);
         solr.request(up);
+        solr.close();
         System.out.println("上传成功！～～～");
+        // 多文件上传示例
+//        ContentStreamUpdateRequest ups; //这行代码不要写到循环体里面，否则影响solr建立索引性能
+
+//        for(File file:files){
+//            ups=new ContentStreamUpdateRequest("/update/extract");
+//            ups.addFile(new File("mailing_lists.pdf"),contentType);
+//            ups.setParam("literal.id", "mailing_lists.pdf");
+//            solr.request(ups);
+//        }
+//        solr.commit();
+//        solr.close();
     }
 
 

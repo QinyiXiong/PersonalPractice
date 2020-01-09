@@ -118,6 +118,8 @@ public class SolrUtil {
         for(SolrDocument document: resultList){
             System.out.println("id:"+document.get("id")+"   document:"+document.get("filename")+"    description:"+document.get("description"));
         }
+        server.close();
+
 
     }
 
