@@ -77,6 +77,18 @@
             <version>7.7.2</version>
         </dependency>
 
+        <!--   spring-core     -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.1.12.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pansoft.fastdfsclient</groupId>
+            <artifactId>fastdfsclient</artifactId>
+            <version>1.4</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
