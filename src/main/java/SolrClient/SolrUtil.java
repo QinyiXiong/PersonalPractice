@@ -9,7 +9,8 @@ import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 
 import java.io.IOException;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author: 覃义雄
@@ -63,14 +64,21 @@ public class SolrUtil {
      * @throws SolrServerException
      * @throws IOException
      */
-    public void deleteDocumentById() throws SolrServerException, IOException {
+    public void deleteDocumentById() {
         HttpSolrClient server = new HttpSolrClient.Builder(SOLR_URL)
                 .withConnectionTimeout(10000)
                 .withSocketTimeout(60000).build();
+        try {
+            server.deleteById("6");
+            server.commit();
+            server.close();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
 
-        server.deleteById("6");
-        server.commit();
-        server.close();
+        }
     }
 
     /**
@@ -121,6 +129,46 @@ public class SolrUtil {
         server.close();
 
 
+    }
+
+    /**
+     * @Description：获取系统当天日期yyyy-mm-dd
+     */
+    public static String GetCurrentDate(){
+        Date dt = new Date();
+        //最后的aa表示“上午”或“下午”    HH表示24小时制    如果换成hh表示12小时制
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aa");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String day =sdf.format(dt);
+        return day;
+    }
+
+    public static String getFileContentType(String filename){
+        String contentType = "";
+        String prefix = filename.substring(filename.lastIndexOf(".") + 1);
+        if (prefix.equals("xlsx")) {
+            contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        } else if (prefix.equals("pdf")) {
+            contentType = "application/pdf";
+        } else if (prefix.equals("doc")) {
+            contentType = "application/msword";
+        } else if (prefix.equals("txt")) {
+            contentType = "text/plain";
+        } else if (prefix.equals("xls")) {
+            contentType = "application/vnd.ms-excel";
+        } else if (prefix.equals("docx")) {
+            contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        } else if (prefix.equals("ppt")) {
+            contentType = "application/vnd.ms-powerpoint";
+        } else if (prefix.equals("pptx")) {
+            contentType = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+        }
+
+        else {
+            contentType = "othertype";
+        }
+
+        return contentType;
     }
 
     public static void main(String[] args) throws Exception {
