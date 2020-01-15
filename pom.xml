@@ -65,7 +65,7 @@
             <version>1.27-RELEASE</version>
         </dependency>
 
-        <!--    solr    -->
+        <!-- solr -->
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
@@ -88,12 +88,12 @@
         <dependency>
             <groupId>com.pansoft.solrclient</groupId>
             <artifactId>solrclient</artifactId>
-            <version>1.0</version>
+            <version>1.3</version>
         </dependency>
         <dependency>
             <groupId>com.pansoft.fastdfsclient</groupId>
             <artifactId>fastdfsclient</artifactId>
-            <version>1.4</version>
+            <version>1.5</version>
         </dependency>
 
     </dependencies>
