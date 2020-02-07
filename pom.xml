@@ -84,6 +84,13 @@
             <version>5.1.12.RELEASE</version>
         </dependency>
 
+        <!-- 阿里的json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
+
         <!--   自己的jar     -->
         <dependency>
             <groupId>com.pansoft.solrclient</groupId>
@@ -94,6 +101,11 @@
             <groupId>com.pansoft.fastdfsclient</groupId>
             <artifactId>fastdfsclient</artifactId>
             <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pansoft.activiticlient</groupId>
+            <artifactId>activiticlient</artifactId>
+            <version>1.2</version>
         </dependency>
 
     </dependencies>
