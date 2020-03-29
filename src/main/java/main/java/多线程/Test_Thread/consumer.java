@@ -7,9 +7,9 @@ package main.java.多线程.Test_Thread;
  * @Name: consumer
  */
 public class consumer extends Thread {
-    Thread_test t = null;
+    main.java.多线程.Test_Thread.Thread_test t = null;
 
-    public consumer(Thread_test t) {
+    public consumer(main.java.多线程.Test_Thread.Thread_test t) {
         this.t = t;
     }
 

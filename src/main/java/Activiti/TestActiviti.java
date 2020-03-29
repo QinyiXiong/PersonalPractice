@@ -16,7 +16,11 @@ public class TestActiviti {
 //        Map<String,Object> hehe =  WorkflowAction.getTaskList("documentcheckflow",null,"9999");
 //        System.out.println(hehe);
 
-        String ss = WorkflowAction.complateTask(null,"documentcheckflow","我启动一个看看","9999");
-        System.out.println(ss);
+//        String ss = WorkflowAction.complateTask(null,"documentcheckflow",);
+//        System.out.println(ss);
+
+        Map<String,Object> yb = WorkflowAction.getHistoryTaskList("documentcheckflow",null,"1234","0","99");
+        System.out.println(yb);
+
     }
 }

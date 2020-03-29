@@ -54,10 +54,10 @@ public class TestSolr {
 //        System.out.println(res==1?"上传建立索引成功":"失败");
 
         // 3.查询示例  查询结果集中返回2条记录
-        List<Map<String,Object>> reslist =  Solrdocument.queryDocument("我爱",0,2);
-        for (Map<String, Object> res : reslist) {
-            System.out.println(res.get("title"));
-        }
+//        List<Map<String,Object>> reslist =  Solrdocument.queryDocument("我爱",0,2);
+//        for (Map<String, Object> res : reslist) {
+//            System.out.println(res.get("title"));
+//        }
 
 
     }

@@ -1,5 +1,6 @@
 package FastClient;
 
+import com.pansof.fastdfsclient.Fastdfsclient;
 import org.csource.fastdfs.FileInfo;
 
 import javax.swing.filechooser.FileSystemView;
@@ -19,10 +20,10 @@ public class testFastdfs {
     public void uploadFast()throws Exception {
         // 1、把FastDFS提供的jar包添加到工程中
         // 2、初始化全局配置。加载一个配置文件。
-        String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
-        FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
+//        String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
+        Fastdfsclient fastDFSClient = new Fastdfsclient();
         //上传文件  group1/M00/00/00/wKj4gl4UHtyAGvGtAA8lRFOCqy4090.pdf
-        String filePath = fastDFSClient.uploadFile("/Users/pe_qyx/Downloads/es.pdf");
+        String filePath = fastDFSClient.uploadFile("/Users/pe_qyx/Downloads/docker.txt");
         System.out.println("返回路径：" + filePath);
         //省略其他
 

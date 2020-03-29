@@ -32,7 +32,6 @@ public class Runnable_test implements Runnable {
         return tickets--;
     }
 
-    @Override
     public void run() {
         while (true) {
             if (tickets == 0) System.exit(0);
