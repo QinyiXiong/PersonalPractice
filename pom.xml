@@ -25,6 +25,14 @@
         </resources>
     </build>
     <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -56,11 +64,6 @@
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
             <version>6.5.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.pansoft.elasticsearchclient</groupId>
-            <artifactId>elasticsearchclient</artifactId>
-            <version>1.0</version>
         </dependency>
 
         <!--    fastdfs    -->

@@ -47,14 +47,15 @@ public class esTest {
         // 插入
         Map<String,Object> data1 = new HashMap<String, Object>();
         Map<String,Object> data2 = new HashMap<String, Object>();
-        File f1 = new File("/Users/pe_qyx/Downloads/普联家园（总004期）.pdf");
-//        File f2 = new File("/Users/pe_qyx/Downloads/jenkins.docx");
-        StringBuffer f2 = new StringBuffer();
-        f2.append("我爱北京天安门，朋总你最棒");
+
+        File f1 = new File("/Users/pe_qyx/Desktop/testadd/1.pdf");
+        File f2 = new File("/Users/pe_qyx/Desktop/testadd/2.pdf");
+//        StringBuffer f2 = new StringBuffer();
+//        f2.append("我爱北京天安门，朋总你最棒");
 
         // 必须且唯一
-        data1.put("id", "000002200datasource");
-        data2.put("id", "000002200datasourcetest");
+        data1.put("id", "testAddDataContent1");
+        data2.put("id", "testAddDataContent1");
 
         // 非必须
         data1.put("description","hehe");
