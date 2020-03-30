@@ -48,14 +48,14 @@ public class esTest {
         Map<String,Object> data1 = new HashMap<String, Object>();
         Map<String,Object> data2 = new HashMap<String, Object>();
 
-        File f1 = new File("/Users/pe_qyx/Desktop/testadd/1.pdf");
-        File f2 = new File("/Users/pe_qyx/Desktop/testadd/2.pdf");
+        File f1 = new File("/Users/pe_qyx/Downloads/新建文件夹/2.pdf");
+        File f2 = new File("/Users/pe_qyx/Downloads/新建文件夹/3.pdf");
 //        StringBuffer f2 = new StringBuffer();
 //        f2.append("我爱北京天安门，朋总你最棒");
 
         // 必须且唯一
-        data1.put("id", "testAddDataContent1");
-        data2.put("id", "testAddDataContent1");
+        data1.put("id", "testAddDataContent7");
+        data2.put("id", "testAddDataContent7");
 
         // 非必须
         data1.put("description","hehe");
@@ -89,7 +89,19 @@ public class esTest {
         files.add(data1);
         files.add(data2);
 
-        int res = Esdocument.indexDocument(files);
+        //多文件建立索引
+//        int res = Esdocument.indexDocument(files);
+//        System.out.println(res==1?"上传建立索引成功":"失败");
+        //单文件建立索引
+        int res1 = Esdocument.indexDoucument(data1);
+//        int res2 = Esdocument.indexDoucument(data2);
+        System.out.println(res1==1?"上传建立索引成功":"失败");
+//        System.out.println(res2==1?"上传建立索引成功":"失败");
+    }
+
+    @Test
+    public void testupdatecontent(){
+        int res = Esdocument.updateDocumentContent("testAddDataContent7");
         System.out.println(res==1?"上传建立索引成功":"失败");
     }
 

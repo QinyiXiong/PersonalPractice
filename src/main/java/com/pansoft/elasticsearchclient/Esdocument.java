@@ -14,9 +14,11 @@ import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
@@ -25,12 +27,13 @@ import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.script.Script;
+import org.elasticsearch.script.ScriptType;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -119,6 +122,31 @@ public class Esdocument {
 //        return res;
 //    }
 
+    public static int updateDocumentContent(String id){
+        int res = 0;
+        RestHighLevelClient client = getClient();
+        try {
+            Map<String,Object> params = new HashMap<>();
+            String inlineScript = "ctx._source.datacontent = ctx._source.datacontent + ctx._source.attachment.content";
+            Script script = new Script(ScriptType.INLINE,"painless",inlineScript,params);
+//            Script script = new Script("add_datacontent");
+            UpdateRequest uprequest = new UpdateRequest(DocConstant._DOC_INDEX, DocConstant._DOC_TYPE, id).script(script);
+            UpdateResponse upresponse = client.update(uprequest,RequestOptions.DEFAULT);
+            if ("OK".equals(upresponse.status().name())) {
+                res = 1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return res;
+    }
     public static int updateDocument(List<Map<String, Object>> files) {
         int res = 0;
         BulkRequest bulkRequest = new BulkRequest();
@@ -200,7 +228,83 @@ public class Esdocument {
     }
 
     /**
-     * 文件上传
+     * 单文件上传
+     * @param file
+     * @return
+     */
+    public static int indexDoucument(Map<String, Object> file){
+        int res = 0;
+        Map<String, Object> jsonMap = new HashMap<String, Object>();
+        String id = file.get(DocConstant.DOC_ID) == null ? "" : file.get(DocConstant.DOC_ID).toString();
+        String description = file.get(DocConstant.DOC_DESC) == null ? "" : file.get(DocConstant.DOC_DESC).toString();
+        String author = file.get(DocConstant.DOC_AUTHOR) == null ? "" : file.get(DocConstant.DOC_AUTHOR).toString();
+        String title = file.get(DocConstant.DOC_TITLE) == null ? "" : file.get(DocConstant.DOC_TITLE).toString();
+        String fastdfspath = file.get(DocConstant.DOC_PATH) == null ? "" : file.get(DocConstant.DOC_PATH).toString();
+        String keywords = file.get(DocConstant.DOC_KEYWORDS) == null ? "" : file.get(DocConstant.DOC_KEYWORDS).toString();
+        //文档权限管理(F_LEVEL,F_SVC_DIR)
+        String flevel = file.get(DocConstant.DOC_FLEVEL) == null ? "" : file.get(DocConstant.DOC_FLEVEL).toString();
+        String fsvrdir = file.get(DocConstant.DOC_FSVRDIR) == null ? "" : file.get(DocConstant.DOC_FSVRDIR).toString();
+        String fstatus = file.get(DocConstant.DOC_FSTATUS) == null ? "" : file.get(DocConstant.DOC_FSTATUS).toString();
+        String filename = file.get(DocConstant.DOC_FILENAME) == null ? "" : file.get(DocConstant.DOC_FILENAME).toString();
+        String dataSource = file.get("dataSource") == null ? "" : file.get("dataSource").toString();
+
+        if (file.get("file") == null) {
+            return res;
+        }
+        if (id.equals("")) {
+            return res;
+        }
+        IndexRequest indexRequest = null;
+        RestHighLevelClient client = getClient();
+        try {
+            jsonMap.put("createtime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            jsonMap.put(DocConstant.DOC_DESC, description);
+            jsonMap.put(DocConstant.DOC_AUTHOR, author);
+            jsonMap.put(DocConstant.DOC_TITLE, title);
+            jsonMap.put(DocConstant.DOC_PATH, fastdfspath);
+            jsonMap.put(DocConstant.DOC_KEYWORDS, keywords);
+            jsonMap.put(DocConstant.DOC_FLEVEL, flevel);
+            jsonMap.put(DocConstant.DOC_FSVRDIR, fsvrdir);
+            jsonMap.put(DocConstant.DOC_FSTATUS, fstatus);
+            jsonMap.put(DocConstant.DOC_ID, id);
+            jsonMap.put(DocConstant.DOC_DATASOURCE, dataSource);
+
+            if(file.get("file") instanceof File){
+                File tempfile = (File) file.get("file");
+                String fileType = tempfile.getName().substring(tempfile.getName().lastIndexOf(".") + 1);
+                jsonMap.put(DocConstant.DOC_FILETYPE, fileType);
+                jsonMap.put(DocConstant.DOC_FILENAME, tempfile.getName());
+                jsonMap.put("data", FileToBase64.encodeBase64File(tempfile));
+                indexRequest = new IndexRequest(DocConstant._DOC_INDEX, DocConstant._DOC_TYPE, id).setPipeline("attachment").source(jsonMap);
+            }else if(file.get("file") instanceof StringBuffer){
+                StringBuffer tempfile = (StringBuffer) file.get("file");
+                String fileType = "text";
+                jsonMap.put(DocConstant.DOC_FILETYPE, fileType);
+                jsonMap.put(DocConstant.DOC_FILENAME, filename);
+                jsonMap.put("datacontent",tempfile.toString());
+                indexRequest = new IndexRequest(DocConstant._DOC_INDEX, DocConstant._DOC_TYPE, id).source(jsonMap);
+            }else {
+                return 0;
+            }
+            indexRequest.timeout(TimeValue.timeValueSeconds(30)); //设置超时
+            IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+            if ("OK".equals(indexResponse.status().name())) {
+                res = 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 多文件上传
      *
      * @param files
      * @return
