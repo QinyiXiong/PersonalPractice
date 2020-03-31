@@ -58,13 +58,13 @@ public class Esdocument {
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             String elasticUser = ElasticsearchUtil.getProperties("elasticUser");
             String elasticPassword = ElasticsearchUtil.getProperties("elasticPassword");
-            String[] eshost = ElasticsearchUtil.getProperties("elasticsearch.rest.hostNames").split(":");
-            String hostname = eshost[0];
-            int port = Integer.parseInt(eshost[1]);
+            String[] eshosts = ElasticsearchUtil.getProperties("elasticsearch.rest.hostNames").split(",");
+            String hostname1 = eshosts[0].split(":")[0];
+            int port1 = Integer.parseInt(eshosts[0].split(":")[1]);
             if (elasticUser == null) {
                 client = new RestHighLevelClient(
                         RestClient.builder(
-                                new HttpHost(hostname, port)
+                                new HttpHost(hostname1, port1)
                         )
                 );
             } else {
@@ -72,7 +72,7 @@ public class Esdocument {
                         new UsernamePasswordCredentials(elasticUser, elasticPassword));  //es账号密码
                 client = new RestHighLevelClient(
                         RestClient.builder(
-                                new HttpHost(hostname, port)
+                                new HttpHost(hostname1, port1)
                         ).setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
                             public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
                                 httpClientBuilder.disableAuthCaching();

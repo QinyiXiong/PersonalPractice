@@ -92,7 +92,7 @@ public class FileToBase64 {
         out.write(buffer);
         out.close();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        try {
 //            String base64Code =encodeBase64File("/Users/Crazy/Pictures/zyb2.jpg");
 //            System.out.println(base64Code);
@@ -101,5 +101,6 @@ public class FileToBase64 {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+//        ElasticsearchUtil.testfastdfs();
     }
 }
