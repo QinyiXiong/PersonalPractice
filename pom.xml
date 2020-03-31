@@ -135,6 +135,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- oracle 数据库驱动 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
@@ -142,6 +149,13 @@
             <id>release</id>
             <name>Release</name>
             <url>http://maven.yonyoucloud.com/nexus/content/repositories/releases/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+        <repository>
+            <id>release</id>
+            <name>Release</name>
+            <url>http://nexus.saas.hand-china.com/content/repositories/rdc/</url>
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>true</enabled></snapshots>
         </repository>

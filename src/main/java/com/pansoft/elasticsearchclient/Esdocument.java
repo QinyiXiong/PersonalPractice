@@ -7,6 +7,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -51,6 +52,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class Esdocument {
 
+    private static final int DEFAULT_CONNECTION_REQUEST_TIMEOUT_MILLIS = 6*60*1000;
+
     private static RestHighLevelClient getClient() {
         RestHighLevelClient client = null;
         try {
@@ -65,7 +68,19 @@ public class Esdocument {
                 client = new RestHighLevelClient(
                         RestClient.builder(
                                 new HttpHost(hostname1, port1)
-                        )
+                        ).setMaxRetryTimeoutMillis(6 * 60 * 1000).setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
+                            @Override
+                            public HttpAsyncClientBuilder customizeHttpClient(
+                                    HttpAsyncClientBuilder httpClientBuilder) {
+                                RequestConfig.Builder requestConfigBuilder = RequestConfig.custom()
+                                        .setConnectTimeout(6*60*1000)
+                                        .setSocketTimeout(6*60*1000)
+                                        .setConnectionRequestTimeout(DEFAULT_CONNECTION_REQUEST_TIMEOUT_MILLIS);
+                                httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
+                                return httpClientBuilder;
+                            }
+
+                        })
                 );
             } else {
                 credentialsProvider.setCredentials(AuthScope.ANY,
@@ -74,11 +89,17 @@ public class Esdocument {
                         RestClient.builder(
                                 new HttpHost(hostname1, port1)
                         ).setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
-                            public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
-                                httpClientBuilder.disableAuthCaching();
-                                return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+                            @Override
+                            public HttpAsyncClientBuilder customizeHttpClient(
+                                    HttpAsyncClientBuilder httpClientBuilder) {
+                                RequestConfig.Builder requestConfigBuilder = RequestConfig.custom()
+                                        .setConnectTimeout(6*60*1000)
+                                        .setSocketTimeout(6*60*1000)
+                                        .setConnectionRequestTimeout(DEFAULT_CONNECTION_REQUEST_TIMEOUT_MILLIS);
+                                httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build()).setDefaultCredentialsProvider(credentialsProvider).disableAuthCaching();
+                                return httpClientBuilder;
                             }
-                        })/*.setMaxRetryTimeoutMillis(2000)*/
+                        }).setMaxRetryTimeoutMillis(6 * 60 * 1000)
                 );
             }
 

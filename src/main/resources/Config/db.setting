@@ -1,8 +1,9 @@
 ## db.setting文件
 
-url = jdbc:mysql://192.168.248.213:3306/cloudgo-reptile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-user = root
-pass = 123456
+# url = jdbc:mysql://192.168.248.213:3306/cloudgo-reptile?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+url = jdbc:oracle:thin:@192.168.248.153:1521:ORCL
+user = QLSHCS
+pass = CWPASS
 
 ## 可选配置
 # 是否在日志中显示执行的SQL
