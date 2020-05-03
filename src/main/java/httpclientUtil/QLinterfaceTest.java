@@ -174,9 +174,9 @@ public class QLinterfaceTest {
     public static void main(String[] args) throws SQLException, InterruptedException {
         QLinterfaceTest ql = new QLinterfaceTest();
 //        ql.sendA(100,"taxService/sendData/FangChanTuDi/Caiji/Select/CaiJiMainInfo");
-        // 5.9.1房产土地申报 往期未申报的数据查询
-        ql.sendA(90,"taxService/sendData/FangChanTuDi/ShenBao/Select/WangQiWeiShenBao");
-        // 5.9.2 城镇土地使用税和房产税的纳税申报表 和 减免税明细申报表 查询
+        // 5.9.1 房产土地申报 往期未申报的数据查询
+//        ql.sendA(90,"taxService/sendData/FangChanTuDi/ShenBao/Select/WangQiWeiShenBao");
+        // 5.9.2 城镇土地使用税和房产税的 纳税申报表 和 减免税明细申报表 查询
         ql.sendA(91,"taxService/sendData/FangChanTuDi/ShenBao/Select/TdFcNaShuiShenBaoAndJianMianMingXi");
 
         // 5.9.3 房产土地确认申报 （可不敢随便）
