@@ -27,6 +27,12 @@
         </resources>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>osp.cloud.server</groupId>
+            <artifactId>osp-server-all</artifactId>
+            <version>1.0.1032</version>
+            <type>pom</type>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
