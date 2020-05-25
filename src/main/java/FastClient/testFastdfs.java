@@ -23,7 +23,7 @@ public class testFastdfs {
 //        String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         Fastdfsclient fastDFSClient = new Fastdfsclient();
         //上传文件  group1/M00/00/00/wKj4gl4UHtyAGvGtAA8lRFOCqy4090.pdf
-        String filePath = fastDFSClient.uploadFile("/Users/pe_qyx/Downloads/docker.txt");
+        String filePath = fastDFSClient.uploadFile("/Users/qinyixiong/Downloads/监控首页接口.txt");
         System.out.println("返回路径：" + filePath);
         //省略其他
 
@@ -44,7 +44,7 @@ public class testFastdfs {
         //下载文件到用户桌面位置
         FileSystemView fsv = FileSystemView.getFileSystemView();
         File com=fsv.getHomeDirectory(); //读取桌面路径
-        int downFlag=fastDFSClient.download_file("group1/M00/00/00/wKj4gl4UHtyAGvGtAA8lRFOCqy4090.pdf",new BufferedOutputStream(new FileOutputStream(com.getPath()+"\\aa.png")));
+        int downFlag=fastDFSClient.download_file("group1/M00/00/00/wKj4eF7JJd2AdRdlAAAVhncCgBM102.txt",new BufferedOutputStream(new FileOutputStream(com.getPath()+"/aa.txt")));
         System.out.println("下载结果为：" +(downFlag==0?"下载文件成功":"下载文件失败"));
 
     }
@@ -55,7 +55,7 @@ public class testFastdfs {
         String confUrl = this.getClass().getClassLoader().getResource("fdfs_client.properties").getPath();
         FastDFSClient fastDFSClient = new FastDFSClient(confUrl);
         //获取文件信息
-        FileInfo file=fastDFSClient.getFile("group1","M00/00/00/wKj4gl4OuMKAYsHnAADcCb28qS0100.png");
+        FileInfo file=fastDFSClient.getFile("group1","group1/M00/00/00/wKj4eF7JJd2AdRdlAAAVhncCgBM102.txt");
         System.out.println("获取文件信息成功："+file.getFileSize());
 
     }
@@ -64,8 +64,9 @@ public class testFastdfs {
             testFastdfs test = new testFastdfs();
             try {
 //                test.getInfofast();
-//                test.downloadFast();
-                test.uploadFast();
+                test.downloadFast();
+//                test.uploadFast();
+//                test.getInfofast();
             }catch (Exception e){
                 e.printStackTrace();
             }

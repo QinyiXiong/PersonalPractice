@@ -157,6 +157,26 @@
             <version>2.9</version>
         </dependency>
 
+        <!-- poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <!-- hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.5</version>
+        </dependency>
+
+        <!--    excelutil    -->
+        <dependency>
+            <groupId>com.github.andyczy</groupId>
+            <artifactId>java-excel-utils</artifactId>
+            <version>4.0</version>
+        </dependency>
     </dependencies>
 
     <repositories>
