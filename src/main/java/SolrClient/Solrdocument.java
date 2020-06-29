@@ -24,7 +24,7 @@ import java.util.Map;
  * @Describe：
  */
 public class Solrdocument {
-    private final static String SOLR_URL = "http://192.168.248.130:8983/solr/documents";
+    private final static String SOLR_URL = "http://localhost:8983/solr/documents";
 
     /**
      * 根据ID从索引库删除文档

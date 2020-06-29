@@ -116,11 +116,11 @@
         </dependency>
 
         <!--   自己的jar     -->
-        <dependency>
-            <groupId>com.pansoft.solrclient</groupId>
-            <artifactId>solrclient</artifactId>
-            <version>1.7</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.pansoft.solrclient</groupId>-->
+<!--            <artifactId>solrclient</artifactId>-->
+<!--            <version>1.7</version>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.pansoft.elasticsearchclient</groupId>-->
 <!--            <artifactId>elasticsearchclient</artifactId>-->
