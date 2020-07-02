@@ -1,4 +1,4 @@
-package main.java.JAVA泛型;
+package JAVA泛型;
 
 /**
  * @author: Pe_Qyx

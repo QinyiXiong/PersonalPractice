@@ -1,4 +1,4 @@
-package main.java.多线程.Test_Thread;
+package 多线程.Test_Thread;
 
 /**
  * @author: Pe_Qyx
@@ -7,9 +7,9 @@ package main.java.多线程.Test_Thread;
  * @Name: consumer
  */
 public class consumer extends Thread {
-    main.java.多线程.Test_Thread.Thread_test t = null;
+    Thread_test t = null;
 
-    public consumer(main.java.多线程.Test_Thread.Thread_test t) {
+    public consumer(Thread_test t) {
         this.t = t;
     }
 

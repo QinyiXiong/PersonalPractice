@@ -1,4 +1,4 @@
-package main.java.多线程.Test_Thread;
+package 多线程.Test_Thread;
 
 /**
  * @author: Pe_Qyx

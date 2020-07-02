@@ -1,4 +1,4 @@
-package main.java.多线程.Test_Runnable;
+package 多线程.Test_Runnable;
 
 /**
  * @author: Pe_Qyx
