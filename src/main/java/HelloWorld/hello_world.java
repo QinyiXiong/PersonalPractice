@@ -1,4 +1,4 @@
-package main.java.HelloWorld;
+package HelloWorld;
 
 /**
  * @author: Pe_Qyx

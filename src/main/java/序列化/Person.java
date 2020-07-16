@@ -1,4 +1,4 @@
-package main.java.序列化;
+package 序列化;
 
 import java.io.Serializable;
 

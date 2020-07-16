@@ -1,4 +1,4 @@
-package main.java.网络编程;
+package 网络编程;
 
 import java.io.BufferedReader;
 import java.io.IOException;

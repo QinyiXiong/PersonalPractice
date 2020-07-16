@@ -1,4 +1,4 @@
-package main.java.简单算法;
+package 简单算法;
 
 /**
  * @author: Pe_Qyx

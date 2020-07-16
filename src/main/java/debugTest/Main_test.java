@@ -1,4 +1,4 @@
-package main.java.debugTest;
+package debugTest;
 
 /**
  * @author: Pe_Qyx

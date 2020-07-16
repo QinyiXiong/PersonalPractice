@@ -1,4 +1,4 @@
-package main.java.输入输出流;
+package 输入输出流;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

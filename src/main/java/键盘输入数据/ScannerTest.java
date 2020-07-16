@@ -1,4 +1,4 @@
-package main.java.键盘输入数据;
+package 键盘输入数据;
 
 import java.util.Scanner;
 

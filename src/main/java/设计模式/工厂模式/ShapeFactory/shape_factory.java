@@ -1,4 +1,4 @@
-package main.java.设计模式.工厂模式.ShapeFactory;
+package 设计模式.工厂模式.ShapeFactory;
 
 /**
  * @author: 覃义雄

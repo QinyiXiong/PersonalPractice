@@ -1,4 +1,4 @@
-package main.java.网络编程.test_TCP;
+package 网络编程.test_TCP;
 
 /**
  * @author: Pe_Qyx
